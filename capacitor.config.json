@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "Aurora_frontend",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
