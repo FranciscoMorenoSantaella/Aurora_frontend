@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar class="background-color">
+    <ion-title>Aurora</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <img
+      class="header-icon right"
+      src="../../../assets/icon/shopping-bag.png"
+    />
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <swiper #swiper class="swiper-container" [config]="config">
+    <ng-template swiperSlide>
+      <p class="swiper-text">Envío estandar gratis en todas las compras</p>
+    </ng-template>
+    <ng-template swiperSlide>
+      <p class="swiper-text">30 días para devolución en tus compras</p>
+    </ng-template>
+    <ng-template swiperSlide>
+      <p class="swiper-text">
+        Registrate para empezar a comprar nuestros productos
+      </p>
+    </ng-template>
+  </swiper>
+
+  <h1>Mi cuenta</h1>
+
+  <ion-segment (ionChange)="segmentChanged($event)" #segment color="dark">
+    <ion-segment-button value="login">
+      <ion-label>Iniciar sesión</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="signup">
+      <ion-label>Crear cuenta</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div class="container" *ngIf="this.login">
+    <ion-item>
+      <ion-label color="dark" position="floating">Email *</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="dark" position="floating">Password *</ion-label>
+
+      <ion-input></ion-input>
+    </ion-item>
+  </div>
+
+  <div class="container" *ngIf="!this.login">
+
+    <ion-item>
+      <ion-label color="dark" position="floating">Nombre *</ion-label>
+
+      <ion-input></ion-input>
+    </ion-item>
+
+    
+    <ion-item>
+      <ion-label color="dark" position="floating">Apellidos</ion-label>
+
+      <ion-input></ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label color="dark" position="floating">Email *</ion-label>
+
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color="dark" position="floating">Password *</ion-label>
+      <ion-input type="password"></ion-input>
+    </ion-item>
+  </div>
+
+  <div *ngIf="!this.login" class="container"></div>
+  <ion-button class="black" expand="block">Continuar</ion-button>
+</ion-content>
+
+<ion-menu side="start" contentId="menuContent">
+  <ion-header>
+    <ion-toolbar class="background-color">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <img class="img-menu" src="../../../assets/images/motogp.svg" />
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<div id="menuContent"></div>
