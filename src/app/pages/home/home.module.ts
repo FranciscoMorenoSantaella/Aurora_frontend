@@ -5,7 +5,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { SwiperModule } from 'swiper/angular';
 import { HomePageRoutingModule } from './home-routing.module';
-
+import { HeadercComponent } from 'src/app/components/headerc/headerc.component';
+import { SwipercComponent } from 'src/app/components/swiperc/swiperc.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { HomePageRoutingModule } from './home-routing.module';
     SwiperModule,
     ReactiveFormsModule
   ],
-  declarations: [HomePage]
+  declarations: [HomePage,HeadercComponent,SwipercComponent]
 })
 export class HomePageModule {}

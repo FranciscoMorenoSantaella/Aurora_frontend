@@ -1,0 +1,41 @@
+.back-button {
+	z-index: 100;
+}
+
+ion-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.div{
+  height: 20px;
+  background-color: black;
+}
+
+.swiper-container{
+  background-color: black;
+  text-align: center;
+  height: 60px;
+}
+
+.swiper-text{
+  color:white;
+}
+
+.header-icon{
+  height: 32px;
+  width: 32px;
+  margin-right: 12px;
+}
+
+.right{
+  float: right;
+}
+
+ion-back-button {
+  display: block;
+}
