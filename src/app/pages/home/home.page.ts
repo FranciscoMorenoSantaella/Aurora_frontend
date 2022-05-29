@@ -4,17 +4,14 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { SwiperOptions } from 'swiper';
-import { SwiperComponent, SwiperModule } from 'swiper/angular';
-import { Router } from '@angular/router';
-import SwiperCore, { Pagination,Autoplay } from 'swiper';
-import 'swiper/css/autoplay';
 
+import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { IonSegment } from '@ionic/angular';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { User } from 'src/app/model/User';
 
-SwiperCore.use([Pagination]);
-SwiperCore.use([Autoplay]);
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -22,40 +19,68 @@ SwiperCore.use([Autoplay]);
   encapsulation: ViewEncapsulation.None,
 })
 export class HomePage implements AfterContentChecked {
-  @ViewChild('swiper') swiper: SwiperComponent;
-  @ViewChild('segment') segment:IonSegment;
-  login:Boolean = false;
 
-  config: SwiperOptions = {
-    //El numero de slides que se muestran a la vez
-    slidesPerView: 1,
-    //El espacio que hay para cambiar de un slide a otro
-    spaceBetween: 50,
-    //Sirve para que se cambien de forma automatica los slides
-    autoplay:true,
-    //Loop sirve para que la animacion del autoplay no vaya hacia atras cuando se acaben los slides
-    loop:true,
-    
-  };
-  
+  @ViewChild('segment') segment: IonSegment;
+  segmentaux: Boolean = true;
+  formLogin: FormGroup;
+  formSignUp: FormGroup;
 
-  constructor(private router: Router) {}
+
+
+  constructor(private router: Router, private fb: FormBuilder) {}
 
   async ngOnInit() {
-   
-    }
-  
+    this.formLogin = this.fb.group({
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          ),
+        ],
+      ],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+    });
+
+    this.formSignUp = this.fb.group({
+      email: [
+        '',
+        [
+          Validators.required,
+          Validators.pattern(
+            /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+          ),
+        ],
+      ],
+      password: ['', [Validators.required, Validators.minLength(4)]],
+      name: ['', [Validators.required, Validators.minLength(4)]],
+      surname: ['',[Validators.required, Validators.minLength(6)]],
+
+    });
+  }
+
   ngAfterContentChecked(): void {
-    if (this.swiper) {
-      this.swiper.updateSwiper({});
+    
+  }
+
+  segmentChanged($event) {
+    if (this.segment.value == 'login') {
+      this.segmentaux = true;
+    } else if (this.segment.value == 'signup') {
+      this.segmentaux = false;
     }
   }
 
-  segmentChanged($event){
-    if(this.segment.value =='login'){
-      this.login = true;
-    }else if(this.segment.value == 'signup'){
-      this.login = false;
-    }
+  public login(user:User){
+    this.router.navigate(['welcome']);
   }
+
+
+  public signUp(user:User){
+    
+  }
+
 }
+
+
