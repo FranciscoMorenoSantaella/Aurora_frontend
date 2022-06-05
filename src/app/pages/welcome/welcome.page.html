@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar class="background-color">
+    <ion-title>Aurora</ion-title>
+  
+    <ion-buttons slot="end">
+   
+    <img 
+      class="header-icon"
+      src="../../../assets/icon/shopping-bag.png"
+      (click)="goToProducts()"
+    />
+
+</ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<app-swiperc></app-swiperc>
+<ion-content>
+<p>Hola {{this.client?.name}}</p>
+<p>bienvenido/a a tu cuenta de Aurora</p>
+
+<ion-list>
+  <ion-item (click)="goToMyAccount()">
+    <p>Mis datos</p>
+    <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+  </ion-item>
+
+  <ion-item (click)="goToShoppingCart()">
+    <p>Mi carro </p>
+    <ion-icon slot="end" name="arrow-forward-outline"></ion-icon>
+  </ion-item>
+
+  <ion-item>
+    <ion-button expand="full" color="danger" (click)="logout()">Desconectar</ion-button>
+  </ion-item>
+</ion-list>
+</ion-content>

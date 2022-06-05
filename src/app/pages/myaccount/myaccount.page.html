@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar class="background-color">
+    <ion-title>Aurora</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="welcome"></ion-back-button>
+      
+    </ion-buttons>
+    <img
+      class="header-icon right"
+      src="../../../assets/icon/shopping-bag.png"
+    />
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <h3>Datos de usuario</h3>
+  <div class="border-container">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="5"  offset="0.4">
+          <p class="label">Nombre</p>
+        </ion-col>
+        
+        <ion-col>
+          <p>{{this.client?.name}}</p>
+        </ion-col>
+      
+      </ion-row>
+      <ion-row>
+        <ion-col size="5"  offset="0.4">
+          <p class="label">Apellidos</p>
+        </ion-col>
+        
+        <ion-col>
+          <p>{{this.client?.apellidos}}</p>
+        </ion-col>
+      
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="5" offset="0.4">
+          <p class="label">Email</p>
+        </ion-col>
+        
+        <ion-col>
+          <p>{{this.client?.email}}</p>
+        </ion-col>
+      
+      </ion-row>
+      <ion-row>
+        <ion-col size="5"  offset="0.4">
+          <p class="label">Telefono</p>
+        </ion-col>
+        
+        <ion-col>
+          <p>{{this.client?.telefono}}</p>
+        </ion-col>
+      
+      </ion-row>
+      <ion-row>
+        <ion-col size="5" offset="0.4">
+        <p class="label">Contraseña</p>
+        </ion-col>
+        
+        <ion-col>
+        <p>***********</p>
+        </ion-col>
+      
+      </ion-row>
+      </ion-grid>
+    <ion-button color="light" expand="full" (click)="openModal()">Editar datos</ion-button>
+  </div>
+</ion-content>

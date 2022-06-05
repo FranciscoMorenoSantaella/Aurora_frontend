@@ -1,0 +1,34 @@
+.back-button {
+	z-index: 100;
+}
+
+ion-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+
+.header-icon{
+  height: 32px;
+  width: 32px;
+  margin-right: 12px;
+}
+
+.right{
+  float: right;
+}
+
+.product-img{
+}
+
+ion-grid{
+  border-top: 1px solid black;
+  margin-top: -5%;
+}
+
+ion-chip{
+  margin-left: -5px;
+}

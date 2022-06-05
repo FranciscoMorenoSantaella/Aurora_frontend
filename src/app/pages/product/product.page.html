@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar class="background-color">
+    <ion-title>Aurora</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="products"></ion-back-button>
+      
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<app-swiperc></app-swiperc>
+<ion-content>
+<div>
+<img class="product-img" src="../../../assets/images/anillo1.png">
+<ion-grid>
+  <ion-row>
+<ion-col>
+  <p>{{this.product?.name}}</p>
+</ion-col>
+<ion-col size="2">
+  <p>{{this.product?.price}} €</p>
+</ion-col>
+  </ion-row>
+  <ion-row>
+    <ion-col>
+      <ion-chip *ngIf="this.product?.stock >0" color="success">
+        <ion-label>En stock</ion-label>
+      </ion-chip>
+      <ion-chip *ngIf="this.product?.stock <=0" color="danger">
+        <ion-label>No disponible</ion-label>
+      </ion-chip>
+    </ion-col>
+      </ion-row>
+</ion-grid>
+</div>
+<ion-button *ngIf="this.product?.stock >0" expand="full" color="dark" (click)="addProductToOrder()">Añadir</ion-button>
+<ion-button disabled *ngIf="this.product?.stock <=0" expand="full" color="dark">Añadir</ion-button>
+</ion-content>

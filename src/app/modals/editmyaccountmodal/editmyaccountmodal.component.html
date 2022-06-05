@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar class="background-color">
+    <ion-title>Aurora</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()">CLOSE</ion-button>
+      
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <diV class="container">
+  <form>
+    <ion-item>
+        <ion-label color="dark" position="floating">Nombre</ion-label>
+        <ion-input value="{{this.client?.name}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="dark" position="floating">Apellidos</ion-label>
+        <ion-input value="{{this.client?.apellidos}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="dark" position="floating">Email</ion-label>
+        <ion-input value="{{this.client?.email}}"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="dark" position="floating">Telefono</ion-label>
+        <ion-input value="{{this.client?.telefono}}"></ion-input>
+      </ion-item>
+
+    </form>
+    </diV>
+    <ion-button expand="full" color="dark">Continuar</ion-button>
+</ion-content>

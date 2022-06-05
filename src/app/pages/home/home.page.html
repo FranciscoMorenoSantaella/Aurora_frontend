@@ -1,0 +1,77 @@
+<app-headerc></app-headerc>
+<ion-content>
+  <app-swiperc></app-swiperc>
+  <h1>Mi cuenta</h1>
+
+  <ion-segment (ionChange)="segmentChanged($event)" #segment color="dark">
+    <ion-segment-button value="login">
+      <ion-label>Iniciar sesión</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="signup">
+      <ion-label>Crear cuenta</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <div class="container" *ngIf="this.segmentaux">
+    <form [formGroup]="formLogin">
+      <ion-item>
+        <ion-label color="dark" position="floating">Email *</ion-label>
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="dark" position="floating">Password *</ion-label>
+
+        <ion-input formControlName="password" type="password"></ion-input>
+      </ion-item>
+    </form>
+    <div class="whitediv"></div>
+    <ion-button class="black" expand="block" (click)="signIn()"
+      >Continuar</ion-button
+    >
+  </div>
+
+  
+  <div class="container" *ngIf="!this.segmentaux">
+    <form [formGroup]="formSignUp">
+      <ion-item>
+        <ion-label color="dark" position="floating">Nombre *</ion-label>
+
+        <ion-input formControlName="name"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Apellidos</ion-label>
+
+        <ion-input formControlName="surname"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="dark" position="floating">Email *</ion-label>
+
+        <ion-input formControlName="email"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="dark" position="floating">Password *</ion-label>
+        <ion-input type="password" formControlName="password"></ion-input>
+      </ion-item>
+    </form>
+    <div class="whitediv"> </div>
+    <ion-button class="black" expand="block" (click)="signUp()"
+      >Continuar</ion-button
+    >
+  </div>
+  <div *ngIf="!this.segmentaux" class="container"></div>
+</ion-content>
+
+<ion-menu side="start" contentId="menuContent">
+  <ion-header>
+    <ion-toolbar class="background-color">
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <img class="img-menu"/>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+<div id="menuContent"></div>
