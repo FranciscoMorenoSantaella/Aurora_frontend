@@ -15,8 +15,9 @@
 
     <ion-card>
       <ion-icon class="save-icon" name="bookmark-outline"></ion-icon>
-      <img  src="../../../assets/images/anillo1.png" />
-
+     <ion-img [src]="">  </ion-img>
+     
+    
       <ion-card-content>
         <p>{{product.name}}</p>
         {{product.price}}
@@ -26,5 +27,5 @@
 </div>
 
 </ion-list>
-
+<ion-button (click)="getImgByProductId(1)"></ion-button>
 </ion-content>
