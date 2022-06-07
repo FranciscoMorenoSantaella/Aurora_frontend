@@ -5,5 +5,6 @@ export interface Product {
   price?:number,
   stock?:number,
   type:String,
-  admin_id:number
+  admin_id:number,
+  url:String
 }

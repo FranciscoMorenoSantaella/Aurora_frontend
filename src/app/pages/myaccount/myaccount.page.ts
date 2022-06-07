@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { EditmyaccountmodalComponent } from 'src/app/modals/editmyaccountmodal/editmyaccountmodal.component';
 import { Client } from 'src/app/model/Client';
 import { ClientService } from 'src/app/services/client.service';
+import { LoadingService } from 'src/app/services/loading.service';
 import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
@@ -14,10 +15,13 @@ import { StorageService } from 'src/app/services/storage.service';
 })
 export class MyaccountPage {
   client:Client;
-  constructor(private router:Router, private modalcontroller:ModalController, private clientservice:ClientService, private storage:StorageService) { }
+  constructor(private router:Router, private modalcontroller:ModalController, private clientservice:ClientService, private storage:StorageService,private loadingservice:LoadingService) { }
 
   async ionViewDidEnter() {
+    await this.loadingservice.presentLoading();
     this.client = await this.storage.get('client');
+    await this.loadingservice.dismissing();
+  
   
   }
 

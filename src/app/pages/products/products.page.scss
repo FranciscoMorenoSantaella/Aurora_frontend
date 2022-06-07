@@ -7,8 +7,17 @@ text-align: center;
 
 }
 
-ion-card-title{
-  
+.back-button {
+	z-index: 100;
+}
+
+ion-title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
 }
 
 ion-card{
@@ -48,5 +57,10 @@ p{
   margin-left: 75%;
   margin-top: 5%;
 
+}
+
+ion-img{
+  height: 150px;
+  width: 150px;
 }
 

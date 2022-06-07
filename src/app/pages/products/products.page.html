@@ -9,13 +9,25 @@
 </ion-header>
 
 <ion-content>
+  
+  <ion-segment (ionChange)="segmentChanged($event)" value="todos" #segment color="dark">
+    <ion-segment-button value="todos">
+      <ion-label>Todos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="anillos">
+      <ion-label>Anillos</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="collares">
+      <ion-label>Collares</ion-label>
+    </ion-segment-button>
+  </ion-segment>
 <ion-list>
   <div *ngFor="let product of productlist; let i = index" >
-
-
     <ion-card>
+      
+          <ion-img [src]="product.url"></ion-img>
       <ion-icon class="save-icon" name="bookmark-outline"></ion-icon>
-     <ion-img [src]="">  </ion-img>
+
      
     
       <ion-card-content>
@@ -27,5 +39,4 @@
 </div>
 
 </ion-list>
-<ion-button (click)="getImgByProductId(1)"></ion-button>
 </ion-content>

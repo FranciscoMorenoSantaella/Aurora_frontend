@@ -9,15 +9,22 @@ export class ImageService {
 
   constructor(private http:HttpClient) { }
 
-  public async getImgByProductId(id:Number):Promise<Image[]>{
+ 
+
+  
+  public async getImgByProductId(id: Number): Promise<Image> {
     return new Promise(async (resolve, reject) => {
+  
+     
       try {
-        let result:any = await this.http.get("http://localhost:8080/image/imgurl/" + id).toPromise();
-        resolve(result);
+        let images = await this.http.get("http://localhost:8080/image/imgurl/" +id).toPromise() as Image;
+        resolve(images);
       } catch (error) {
         reject(error);
       }
     });
   }
+
+
 
 }

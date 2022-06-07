@@ -3,6 +3,7 @@ import { ModalController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Client } from 'src/app/model/Client';
 import { ClientService } from 'src/app/services/client.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 @Component({
   selector: 'app-editmyaccountmodal',
@@ -11,10 +12,12 @@ import { ClientService } from 'src/app/services/client.service';
 })
 export class EditmyaccountmodalComponent implements OnInit {
   client:Client;
-  constructor(private modalcontroller:ModalController, private storage:Storage, private clientservice:ClientService) { }
+  constructor(private modalcontroller:ModalController, private storage:Storage, private clientservice:ClientService, private loadingservice:LoadingService) { }
 
   async ngOnInit() {
+    await this.loadingservice.presentLoading();
     this.client = await this.storage.get('client');
+    await this.loadingservice.dismissing();
   }
 
   async close(){

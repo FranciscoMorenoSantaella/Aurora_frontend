@@ -26,5 +26,33 @@ export class ProductService {
     });
   }
 
+  public getnecklaceProductsByPage(page: Number, limit: Number): Promise<Product[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'getnecklace/' + page + '/' + limit)
+          .toPromise();
+        let clublist = result.content;
+        resolve(clublist);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+  public getRingProductsByPage(page: Number, limit: Number): Promise<Product[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http
+          .get(this.endpoint + 'getrings/' + page + '/' + limit)
+          .toPromise();
+        let clublist = result.content;
+        resolve(clublist);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
 
 }
