@@ -21,7 +21,7 @@ export class MyaccountPage {
     await this.loadingservice.presentLoading();
     this.client = await this.storage.get('client');
     await this.loadingservice.dismissing();
-  
+    console.log(this.client);
   
   }
 

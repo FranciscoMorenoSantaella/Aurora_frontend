@@ -2,7 +2,7 @@ export interface Client {
   id: number,
   name: String,
   email:String,
-  apellidos?: String,
-  telefono?:String,
+  surname?: String,
+  phonenumber?:String,
   uid:String
 }

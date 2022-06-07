@@ -63,6 +63,7 @@ export class HomePage implements AfterContentChecked {
       password: ['', [Validators.required, Validators.minLength(6)]],
       name: ['', [Validators.required, Validators.minLength(4)]],
       surname: ['',[Validators.required, Validators.minLength(6)]],
+      phonenumber: ['',[Validators.minLength(9)]]
 
     });
   }
@@ -109,8 +110,9 @@ export class HomePage implements AfterContentChecked {
         let newClient:Client = {
           id:-1,
           name:this.formSignUp.get('name').value,
-          apellidos:this.formSignUp.get('surname').value,
+          surname:this.formSignUp.get('surname')?.value,
           email:this.formSignUp.get('email').value,
+          phonenumber:this.formSignUp.get('phonenumber')?.value,
           uid:result
         }
        let client = await this.clientservice.createClient(newClient);
