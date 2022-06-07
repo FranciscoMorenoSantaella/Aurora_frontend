@@ -3,5 +3,6 @@ import { Product } from "./Product";
 
 export interface Order {
   client:Client,
-  product:Product
+  product:Product,
+  amount?:Number
 }

@@ -7,6 +7,7 @@ export const environment = {
   endpoint:'http://localhost:8080/',
   apiClient:'client/',
   apiProduct:'product/',
+  apiShoppingCart:'shoppingcart/',
   apiOrder:'order/',
   firebaseConfig:{
     apiKey: "AIzaSyAAe7YGAR4Nsitwrx8SCiNvrFTVdV73qKU",

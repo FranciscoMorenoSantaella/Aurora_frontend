@@ -13,22 +13,25 @@
 </ion-header>
 
 <ion-content>
+  <div  *ngFor="let product of productlist; let i = index">
   <ion-item>
-    <img src="../../../assets/images/anillo1.png" width="148px" height="148px">
+    
+    <ion-img style="width: 148px; height: 148px;" [src]="product.url"></ion-img>
+
     <ion-grid style="float:left;">
       <ion-row>
         <ion-col>
-          <p>Collar dragón plateado</p>
+          <p>{{product?.name}}</p>
         </ion-col>
       </ion-row>
       <ion-row>
-        <p>250.99 €</p>
+        <p>{{product?.price}} €</p>
       </ion-row>
       <ion-row>
         <ion-button color="dark">
           -
     </ion-button>
-    <p style="border:1px solid gray;">1</p>
+    <p style="border:1px solid gray;">{{product.orderlist.amount}}</p>
     <ion-button color="dark">
           +
     </ion-button>
@@ -36,32 +39,10 @@
     </ion-grid>
     
   </ion-item>
-<ion-item>
-  <img src="../../../assets/images/collar.png" width="148px" height="148px">
-  <ion-grid style="float:left;">
-    <ion-row>
-      <ion-col>
-        <p>Collar dorado like oreo</p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <p>250.99 €</p>
-    </ion-row>
-    <ion-row>
-      <ion-button color="dark">
-        -
-  </ion-button>
-  <p style="border:1px solid gray;">1</p>
-  <ion-button color="dark">
-        +
-  </ion-button>
-    </ion-row>
-  </ion-grid>
-  
-</ion-item>
+</div>
 
 <h1>
-  Precio total: 350€
+  {{this?.precio}}
 </h1>
 <ion-button expand="full" color="dark">Añadir</ion-button>
 </ion-content>

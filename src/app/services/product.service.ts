@@ -54,5 +54,17 @@ export class ProductService {
     });
   }
 
+  public async getShoppingcartProductsByClientId(client_id:Number):Promise<Product[]>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.endpoint+ "getshoppingcartproductsbyclientid" + "/" + client_id).toPromise() as Product[];
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+
 
 }

@@ -38,6 +38,7 @@ export class ProductsPage implements OnInit {
     await this.getProducts();
     await this.getImgByProductId();
     await this.loadingservice.dismissing();
+    console.log(this.productlist);
 
   }
 

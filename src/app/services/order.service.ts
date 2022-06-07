@@ -15,5 +15,17 @@ export class OrderService {
     await this.http.post(this.endpoint, order).toPromise();
   }
 
+  public async getShoppingcartOrderByClientId(client_id:Number):Promise<Order[]>{
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = await this.http.get(this.endpoint+ "getshoppingcartordersbyclientid" + "/" + client_id).toPromise() as Order[];
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+
   
 }
