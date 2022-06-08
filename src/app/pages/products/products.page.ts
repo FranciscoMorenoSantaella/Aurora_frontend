@@ -94,5 +94,7 @@ export class ProductsPage implements OnInit {
       this.content.scrollToTop(0);
     }
 
+  
+
   }
 

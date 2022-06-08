@@ -4,18 +4,18 @@ import { environment } from 'src/environments/environment';
 import { Order } from '../model/Order';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
-  
   endpoint: any = environment.endpoint + environment.apiOrder;
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  public async postOrder(order:Order) {
+  public async postOrder(order: Order) {
+    console.log(order);
     await this.http.post(this.endpoint, order).toPromise();
   }
 
-  public async getShoppingcartOrderByClientId(client_id:Number):Promise<Order[]>{
+  /*public async getShoppingcartOrderByClientId(client_id:Number):Promise<Order[]>{
     return new Promise(async (resolve, reject) => {
       try {
         let result: any = await this.http.get(this.endpoint+ "getshoppingcartordersbyclientid" + "/" + client_id).toPromise() as Order[];
@@ -24,8 +24,25 @@ export class OrderService {
         reject(error);
       }
     });
+  }*/
+
+  public async getOrderByShoppingCartId(
+    shoppingcart_id: Number
+  ): Promise<Order[]> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = (await this.http
+          .get(
+            this.endpoint +
+              'getorderbyshoppingcartid' +
+              '/' +
+              shoppingcart_id
+          )
+          .toPromise()) as Order[];
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
   }
-
-
-  
 }

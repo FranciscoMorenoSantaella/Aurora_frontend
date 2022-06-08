@@ -11,5 +11,5 @@ export interface Product {
   admin_id:number,
   url:String,
   orderlist?:Order[],
-  imagelist?:Image[],
+  imagelist?:Image,
 }

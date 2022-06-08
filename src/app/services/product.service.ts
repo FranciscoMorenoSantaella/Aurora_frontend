@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Image } from '../model/Image';
 import { Product } from '../model/Product';
+import { ShoppingcartService } from './shoppingcart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ import { Product } from '../model/Product';
 export class ProductService {
   
   endpoint: any = environment.endpoint + environment.apiProduct;
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private shoppingcartservice:ShoppingcartService) { }
 
   public getProductsByPage(page: Number, limit: Number): Promise<Product[]> {
     return new Promise(async (resolve, reject) => {
@@ -65,6 +66,7 @@ export class ProductService {
     });
   }
 
+ 
 
 
 }

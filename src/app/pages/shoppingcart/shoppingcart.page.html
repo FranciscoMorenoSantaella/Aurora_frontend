@@ -13,25 +13,25 @@
 </ion-header>
 
 <ion-content>
-  <div  *ngFor="let product of productlist; let i = index">
+  <div  *ngFor="let order of orderlist; let i = index">
   <ion-item>
     
-    <ion-img style="width: 148px; height: 148px;" [src]="product.url"></ion-img>
-
+    <ion-img style="width: 148px; height: 148px;" [src]="order.product?.url"></ion-img>
+    
     <ion-grid style="float:left;">
       <ion-row>
         <ion-col>
-          <p>{{product?.name}}</p>
+          <p>{{order.product?.name}}</p>
         </ion-col>
       </ion-row>
       <ion-row>
-        <p>{{product?.price}} €</p>
+        <p>{{order.product?.price}} €</p>
       </ion-row>
       <ion-row>
         <ion-button color="dark">
           -
     </ion-button>
-    <p style="border:1px solid gray;">{{product.orderlist.amount}}</p>
+    <p style="border:1px solid gray;">{{order?.amount}}</p>
     <ion-button color="dark">
           +
     </ion-button>
