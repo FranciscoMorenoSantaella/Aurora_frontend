@@ -14,6 +14,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Client } from 'src/app/model/Client';
 import { AlertserviceService } from 'src/app/services/alertservice.service';
 import { Storage } from '@ionic/storage';
+import { StorageService } from 'src/app/services/storage.service';
 
 
 
@@ -29,14 +30,16 @@ export class HomePage implements AfterContentChecked {
   segmentaux: Boolean = true;
   formLogin: FormGroup;
   formSignUp: FormGroup;
+  client:Client;
 
 
 
-  constructor(private router: Router, private fb: FormBuilder, private clientservice:ClientService,private authservice:AuthService,private storage:Storage,
+  constructor(private router: Router, private fb: FormBuilder, private clientservice:ClientService,private authservice:AuthService,private storage:StorageService,
     private alertservice:AlertserviceService
     ) {}
 
   async ngOnInit() {
+    
     this.formLogin = this.fb.group({
       email: [
         '',
@@ -66,6 +69,14 @@ export class HomePage implements AfterContentChecked {
       phonenumber: ['',[Validators.minLength(9)]]
 
     });
+    
+  }
+
+  async ionViewDidEnter() {
+    this.client = await this.authservice.getCurrentClient();
+    if (this.client) {
+      this.router.navigate(['/welcome']);
+    }
   }
 
   ngAfterContentChecked(): void {

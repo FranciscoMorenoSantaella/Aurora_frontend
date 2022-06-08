@@ -13,11 +13,11 @@
   <ion-img [src]="this.product?.url"></ion-img>
 <ion-grid>
   <ion-row>
-<ion-col>
+<ion-col  size = "9">
   <p>{{this.product?.name}}</p>
 </ion-col>
-<ion-col size="2">
-  <p>{{this.product?.price}} €</p>
+<ion-col  size="2.3">
+  <p >{{this.product?.price}} €</p>
 </ion-col>
   </ion-row>
   <ion-row>
@@ -29,6 +29,9 @@
         <ion-label>No disponible</ion-label>
       </ion-chip>
     </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col><ion-button (click)="rest()" color="dark"><ion-icon name="remove-outline"></ion-icon></ion-button> <div style="display: inline; padding-left: 15px; vertical-align: sub;">{{this?.amount}}</div> <ion-button (click)="sum()" class="button-icon" color="dark"><ion-icon name="add-outline"></ion-icon></ion-button></ion-col>
       </ion-row>
 </ion-grid>
 </div>

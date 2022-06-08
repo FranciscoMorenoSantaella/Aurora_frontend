@@ -24,6 +24,17 @@ export class ProductsPage implements OnInit {
   url = 'localhost:8080/image/files/1f6f8a27-54dc-436c-aff0-4db4735f84ed.png';
   segmentaux: String;
 
+  formatter = new Intl.NumberFormat('es-ES', {
+    style: 'currency',
+    currency: 'EUR',
+  
+    // These options are needed to round to whole numbers if that's what you want.
+    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  });
+
+  formatbalance:string;
+
   constructor(
     private productservice: ProductService,
     private router: Router,
@@ -39,7 +50,7 @@ export class ProductsPage implements OnInit {
     await this.getImgByProductId();
     await this.loadingservice.dismissing();
     console.log(this.productlist);
-
+    this.a();
   }
 
   async getProducts() {
@@ -93,8 +104,11 @@ export class ProductsPage implements OnInit {
     slideTop() {
       this.content.scrollToTop(0);
     }
-
-  
+    a(){
+      let d:string = '15.300000';
+      d = parseFloat(d).toFixed(2);
+      console.log(d);
+    }
 
   }
 

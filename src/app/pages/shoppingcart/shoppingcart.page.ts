@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
 import { Client } from 'src/app/model/Client';
 import { Image } from 'src/app/model/Image';
@@ -24,7 +25,10 @@ export class ShoppingcartPage implements OnInit {
   orderlist:Order[];
   shoppingcartid:Number;
   product:Product;
-  constructor(private productservice:ProductService, private storage:StorageService, private imageservice:ImageService, private shoppingcartservice:ShoppingcartService, private orderservice:OrderService, loadingservice:LoadingService) { }
+  constructor(private productservice:ProductService, private storage:StorageService, 
+    private imageservice:ImageService, private shoppingcartservice:ShoppingcartService, private orderservice:OrderService, loadingservice:LoadingService,
+    private router:Router
+    ) { }
 
   async ngOnInit() {  
 
@@ -41,6 +45,7 @@ export class ShoppingcartPage implements OnInit {
     await this.getLastShoppingCartIdNotPayedByClientId(this.client.id);
     await this.getOrderByShoppingCartId(this.shoppingcartid);
     await this.getImgByProductId();
+    await this.getTotalPrice();
   }
 
  /* async getShoppingcartProductsByClientId(client_id:Number){
@@ -62,7 +67,7 @@ export class ShoppingcartPage implements OnInit {
   }
 
   async getTotalPrice(){
-    this.precio = await this.shoppingcartservice.getTotalPrice(1);
+    this.precio = await this.shoppingcartservice.getTotalPrice(this.shoppingcartid);
   }
 
   async getAmount(){
@@ -70,7 +75,7 @@ export class ShoppingcartPage implements OnInit {
   }
 
   async getOrderByShoppingCartId(shoppingcart_id:Number){
-    this.orderlist = await this.orderservice.getOrderByShoppingCartId(3);
+    this.orderlist = await this.orderservice.getOrderByShoppingCartId(shoppingcart_id);
    console.log(this.orderlist)
   }
 
@@ -79,10 +84,24 @@ export class ShoppingcartPage implements OnInit {
     console.log(this.shoppingcartid);
   }
 
- 
+ async deleteOrder(order_id:Number){
+   this.orderservice.deleteOrder(order_id);
+   this.reloadPage();
+ }
+
+ async reloadPage(){
+  this.ionViewDidEnter();
+ }
+
+ async goToProduct(product:Product){
+   this.storage.set('product',product);
+   this.router.navigate(['product']);
+ }
 
 
-
+ async buyProducts(){
+   
+ }
 
 
 }

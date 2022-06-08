@@ -88,4 +88,12 @@ export class AuthService {
       });
   }
 
+  getCurrentClient():Promise<Client>{
+    if(this.storage.get('client')){
+      return this.client = this.storage.get('client');
+    }else{
+       this.storage.remove('client');
+    }
+  }
+
 }

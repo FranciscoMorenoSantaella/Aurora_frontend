@@ -7,7 +7,7 @@ import { AlertController, IonicSafeString, ToastController } from '@ionic/angula
 export class AlertserviceService {
 
 
-  constructor(public toast: ToastController) { }
+  constructor(public toast: ToastController,private alertcontroller:AlertController) { }
   /**
    * Metodo que muestra un toast
    * @param msg es el texto que va a mostrar el toast
@@ -20,5 +20,19 @@ export class AlertserviceService {
       color:cl
     });
     toast.present();
+  }
+
+  async presentAlert(msg:string, title:string) {
+    const alert = await this.alertcontroller.create({
+      cssClass: 'my-custom-class',
+      header:title,
+      message: msg,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+
+    const { role } = await alert.onDidDismiss();
+    console.log('onDidDismiss resolved with role', role);
   }
 }

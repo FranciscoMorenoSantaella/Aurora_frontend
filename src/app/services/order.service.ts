@@ -15,6 +15,11 @@ export class OrderService {
     await this.http.post(this.endpoint, order).toPromise();
   }
 
+  public async deleteOrder(order_id: Number) {
+    console.log(order_id);
+    await this.http.delete(this.endpoint + order_id).toPromise();
+  }
+
   /*public async getShoppingcartOrderByClientId(client_id:Number):Promise<Order[]>{
     return new Promise(async (resolve, reject) => {
       try {

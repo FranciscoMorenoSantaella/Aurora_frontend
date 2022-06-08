@@ -2,8 +2,7 @@
   <ion-toolbar class="background-color">
     <ion-title>Aurora</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-      
+      <ion-back-button defaultHref="welcome"></ion-back-button>
     </ion-buttons>
     <img
       class="header-icon right"
@@ -13,36 +12,36 @@
 </ion-header>
 
 <ion-content>
-  <div  *ngFor="let order of orderlist; let i = index">
-  <ion-item>
+  <div *ngFor="let order of orderlist; let i = index">
     
-    <ion-img style="width: 148px; height: 148px;" [src]="order.product?.url"></ion-img>
-    
-    <ion-grid style="float:left;">
-      <ion-row>
-        <ion-col>
-          <p>{{order.product?.name}}</p>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <p>{{order.product?.price}} €</p>
-      </ion-row>
-      <ion-row>
-        <ion-button color="dark">
-          -
-    </ion-button>
-    <p style="border:1px solid gray;">{{order?.amount}}</p>
-    <ion-button color="dark">
-          +
-    </ion-button>
-      </ion-row>
-    </ion-grid>
-    
-  </ion-item>
-</div>
+    <ion-item>
+      <ion-img (click)="goToProduct(order.product)"
+        style="width: 148px; height: 148px"
+        [src]="order.product?.url"
+      ></ion-img>
 
-<h1>
-  {{this?.precio}}
-</h1>
-<ion-button expand="full" color="dark">Añadir</ion-button>
+      <ion-grid style="float: left">
+        <ion-row>
+          <ion-col>
+            <p>{{order.product?.name}}</p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-badge color="light">Cantidad: {{order?.amount}}</ion-badge>
+           
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-chip color="success">{{order.product?.price}} €</ion-chip>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-icon name="close-outline"  (click)="deleteOrder(order?.id)"></ion-icon>
+    </ion-item>
+  </div>
+
+  <h1 *ngIf ="this?.precio != null">Precio final: {{this?.precio}} €</h1>
+  <ion-button expand="full" color="dark">Comprar</ion-button>
 </ion-content>

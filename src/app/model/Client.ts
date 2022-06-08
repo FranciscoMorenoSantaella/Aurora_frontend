@@ -4,5 +4,6 @@ export interface Client {
   email:String,
   surname?: String,
   phonenumber?:String,
+  balance?:number,
   uid:String
 }

@@ -9,6 +9,7 @@ export class ClientService {
   endpoint:any = environment.endpoint + environment.apiClient;
   constructor(public http: HttpClient) { }
 
+  
    /**
    * Metodo que sirve para crear un nuevo usuario en la aplicacion
    * @param user es el usuario que vamos a crear
@@ -36,16 +37,21 @@ export class ClientService {
         }
       });
     }
-    public async getClientById(id:number){
-      return new Promise(async (resolve, reject) => {
-        try {
-          let result: any = await this.http.get(this.endpoint+ "getclientbyid/" +id).toPromise();
-          resolve(result);
-        } catch (error) {
-          reject(error);
-        }
-      });
-    }
+
+
+    
+  public async getClientById(client_id:Number):Promise<Client> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = (await this.http
+          .get(this.endpoint + client_id)
+          .toPromise()) as Client;
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
 
     
 }
