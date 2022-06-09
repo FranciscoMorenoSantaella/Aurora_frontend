@@ -142,6 +142,9 @@ export class HomePage implements AfterContentChecked {
     this.router.navigate(['recoverpassword']);
   }
 
+  goToProducts(){
+    this.router.navigate(['products']);
+  }
 }
 
 

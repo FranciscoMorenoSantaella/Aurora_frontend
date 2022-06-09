@@ -3,8 +3,8 @@
     <ion-title>Aurora</ion-title>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="products"></ion-back-button>
-      
     </ion-buttons>
+    <ion-icon (click)="goToShoppingCart()" class="cart" slot="end" name="cart-outline"></ion-icon>
   </ion-toolbar>
 </ion-header>
 <app-swiperc></app-swiperc>
@@ -35,6 +35,7 @@
       </ion-row>
 </ion-grid>
 </div>
-<ion-button *ngIf="this.product?.stock >0" expand="full" color="dark" (click)="addProductToOrder()">Añadir</ion-button>
-<ion-button disabled *ngIf="this.product?.stock <=0" expand="full" color="dark">Añadir</ion-button>
+<ion-button *ngIf="this.product?.stock >0 && this.client" expand="full" color="dark" (click)="addProductToOrder()">Añadir</ion-button>
+<ion-button disabled *ngIf="this.product?.stock <=0 && this.client" expand="full" color="dark">Añadir</ion-button>
+<ion-button *ngIf="!this.client">Inicia sesion crack</ion-button>
 </ion-content>

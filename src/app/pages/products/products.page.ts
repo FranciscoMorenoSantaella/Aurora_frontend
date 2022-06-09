@@ -50,7 +50,7 @@ export class ProductsPage implements OnInit {
     await this.getImgByProductId();
     await this.loadingservice.dismissing();
     console.log(this.productlist);
-    this.a();
+   
   }
 
   async getProducts() {
@@ -104,11 +104,17 @@ export class ProductsPage implements OnInit {
     slideTop() {
       this.content.scrollToTop(0);
     }
-    a(){
+    
+    /*a(){
       let d:string = '15.300000';
       d = parseFloat(d).toFixed(2);
       console.log(d);
+    }*/
+
+    goToShoppingCart(){
+      this.router.navigate(['shoppingcart']);
     }
+  
 
   }
 

@@ -2,9 +2,10 @@
   <ion-toolbar class="background-color">
     <ion-title>Aurora</ion-title>
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="welcome"></ion-back-button>
-      
+      <ion-back-button *ngIf="this.client" defaultHref="welcome"></ion-back-button>
+      <ion-back-button *ngIf="!this.client" defaultHref="home"></ion-back-button>
     </ion-buttons>
+    <ion-icon (click)="goToShoppingCart()" class="cart" slot="end" name="cart-outline"></ion-icon>
   </ion-toolbar>
 </ion-header>
 

@@ -17,7 +17,8 @@ export class AlertserviceService {
     const toast = await this.toast.create({
       message: msg,
       duration: 2000,
-      color:cl
+      color:cl,
+      position:'bottom'
     });
     toast.present();
   }

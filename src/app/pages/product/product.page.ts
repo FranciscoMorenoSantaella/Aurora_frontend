@@ -42,9 +42,7 @@ export class ProductPage  {
   }
 
  
-  goToShoppingCart(){
 
-  }
 
   async addProductToOrder(){
  
@@ -82,6 +80,9 @@ export class ProductPage  {
       this.alertservice.presentAlert(msg,title);
   }
 
+  goToShoppingCart(){
+    this.router.navigate(['shoppingcart']);
+  }
 
 
 }

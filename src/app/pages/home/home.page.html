@@ -1,4 +1,20 @@
-<app-headerc></app-headerc>
+<ion-header>
+  <ion-toolbar class="background-color">
+    <ion-title>Aurora</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+      
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <img 
+      class="header-icon"
+      src="../../../assets/icon/shopping-bag.png"
+      (click)="goToProducts()"
+    />
+    </ion-buttons>
+    
+  </ion-toolbar>
+</ion-header>
 <ion-content>
   <app-swiperc></app-swiperc>
   <h1>Mi cuenta</h1>
@@ -76,9 +92,9 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-list>
-      <img class="img-menu"/>
-    </ion-list>
+   <ion-item>
+     <ion-button expand="full" color="dark">Ver productos</ion-button>
+    </ion-item>
   </ion-content>
 </ion-menu>
 <div id="menuContent"></div>

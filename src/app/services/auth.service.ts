@@ -37,15 +37,15 @@ export class AuthService {
   /**
    * Metodo para cerrar sesion en la aplicacion
    */
-  public logout() {
+  public async logout() {
     let client = this.storage.get('client');
-    if (client) {
+    if (client!=null) {
       this.storage.remove('client');
-      this.alertservice.presentToast(
+      await this.alertservice.presentToast(
         'Se ha cerrado sesión correctamente',
         'success'
       );
-      this.router.navigate(['/home']);
+      await this.router.navigate(['/home']);
     } else {
       this.alertservice.presentToast('No se ha podido cerrar sesión', 'danger');
     }

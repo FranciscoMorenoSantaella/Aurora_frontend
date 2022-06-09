@@ -1,5 +1,5 @@
 .back-button {
-	z-index: 100;
+	z-index: 1;
 }
 
 ion-title {
@@ -15,6 +15,7 @@ ion-title {
   height: 32px;
   width: 32px;
   margin-right: 12px;
+  z-index: 100;
 }
 
 .right{
