@@ -73,7 +73,7 @@ export class HomePage implements AfterContentChecked {
   }
 
   async ionViewDidEnter() {
-    this.client = await this.authservice.getCurrentClient();
+    this.client = await this.storage.get('client');
     if (this.client) {
       this.router.navigate(['/welcome']);
     }
@@ -124,6 +124,7 @@ export class HomePage implements AfterContentChecked {
           surname:this.formSignUp.get('surname')?.value,
           email:this.formSignUp.get('email').value,
           phonenumber:this.formSignUp.get('phonenumber')?.value,
+          balance:1000,
           uid:result
         }
        let client = await this.clientservice.createClient(newClient);

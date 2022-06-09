@@ -4,14 +4,23 @@
     <ion-buttons slot="start">
       <ion-back-button defaultHref="welcome"></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end" (click)="goToProducts()">
     <img
       class="header-icon right"
       src="../../../assets/icon/shopping-bag.png"
     />
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <div *ngIf="this.orderlist?.length == 0" >
+
+    <h1>No has añadido articulos al carro de la compra</h1>
+    <p>Prueba a añadir nuevos articulos</p>
+ 
+    
+  </div>
   <div *ngFor="let order of orderlist; let i = index">
     
     <ion-item>
@@ -42,6 +51,7 @@
     </ion-item>
   </div>
 
-  <h1 *ngIf ="this?.precio != null">Precio final: {{this?.precio}} €</h1>
-  <ion-button expand="full" color="dark">Comprar</ion-button>
+  <h1 *ngIf ="this?.precio != null">Precio final: <ion-chip color="success">{{this?.precio}} € </ion-chip></h1>
+  <ion-button *ngIf="this.orderlist?.length > 0" expand="full" color="dark" (click)="payShoppingCart()">Comprar</ion-button>
+  <ion-button *ngIf="this.orderlist?.length == 0" expand="full" color="dark" (click)="goToProducts()" disabled>Ver productos</ion-button>
 </ion-content>

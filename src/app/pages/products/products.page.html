@@ -5,7 +5,8 @@
       <ion-back-button *ngIf="this.client" defaultHref="welcome"></ion-back-button>
       <ion-back-button *ngIf="!this.client" defaultHref="home"></ion-back-button>
     </ion-buttons>
-    <ion-icon (click)="goToShoppingCart()" class="cart" slot="end" name="cart-outline"></ion-icon>
+    <ion-icon (click)="goToShoppingCart()"  class="cart" slot="end" name="cart-outline"></ion-icon>
+    <ion-badge class="badge-color">{{this?.badge}}</ion-badge>
   </ion-toolbar>
 </ion-header>
 
@@ -33,7 +34,7 @@
     
       <ion-card-content>
         <p>{{product.name}}</p>
-        {{product.price}}
+        {{product.price}} €
        <ion-button expand="full" (click)="goToProduct(product)">Detalles</ion-button>
       </ion-card-content>
     </ion-card>

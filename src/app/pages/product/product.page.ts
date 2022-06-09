@@ -1,3 +1,4 @@
+import { NumberSymbol } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Client } from 'src/app/model/Client';
@@ -23,6 +24,7 @@ export class ProductPage  {
   client:Client;
   shoppingcartid:Number;
   amount:number = 1;
+  badge:number;
  
 
   constructor(private productservice:ProductService, private storage:StorageService, private router:Router, private orderservice:OrderService,private loadingservice:LoadingService, private shoppingcartservice:ShoppingcartService,
@@ -39,6 +41,7 @@ export class ProductPage  {
     await this.getLastShoppingCartIdNotPayedByClientId(this.client.id);
  
     console.log(this.shoppingcartid);
+    this.calculateBadge();
   }
 
  
@@ -59,7 +62,7 @@ export class ProductPage  {
     }
   }
 
-  public async getLastShoppingCartIdNotPayedByClientId(client_id:Number){
+  public async getLastShoppingCartIdNotPayedByClientId(client_id:number){
     this.shoppingcartid = await this.shoppingcartservice.getLastShoppingCartIdNotPayedByClientId(client_id);
     console.log(this.shoppingcartid);
   }
@@ -83,6 +86,14 @@ export class ProductPage  {
   goToShoppingCart(){
     this.router.navigate(['shoppingcart']);
   }
+
+  async calculateBadge(){
+    let shoopingcartid:number = await this.shoppingcartservice.getLastShoppingCartIdNotPayedByClientId(this.client.id);
+   
+    this.badge =  (await this.orderservice.getOrderByShoppingCartId(shoopingcartid)).length;
+    console.log(this.badge);
+   }
+
 
 
 }

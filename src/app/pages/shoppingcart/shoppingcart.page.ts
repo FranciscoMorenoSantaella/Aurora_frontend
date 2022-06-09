@@ -5,6 +5,7 @@ import { Client } from 'src/app/model/Client';
 import { Image } from 'src/app/model/Image';
 import { Order } from 'src/app/model/Order';
 import { Product } from 'src/app/model/Product';
+import { AlertserviceService } from 'src/app/services/alertservice.service';
 import { ImageService } from 'src/app/services/image.service';
 import { LoadingService } from 'src/app/services/loading.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -21,13 +22,13 @@ export class ShoppingcartPage implements OnInit {
   client:Client;
   productlist:Product[] = [];
   image:Image;
-  precio:Number;
+  precio:number;
   orderlist:Order[];
-  shoppingcartid:Number;
+  shoppingcartid:number;
   product:Product;
   constructor(private productservice:ProductService, private storage:StorageService, 
-    private imageservice:ImageService, private shoppingcartservice:ShoppingcartService, private orderservice:OrderService, loadingservice:LoadingService,
-    private router:Router
+    private imageservice:ImageService, private shoppingcartservice:ShoppingcartService, private orderservice:OrderService, private loadingservice:LoadingService,
+    private router:Router, private alertservice:AlertserviceService
     ) { }
 
   async ngOnInit() {  
@@ -41,14 +42,18 @@ export class ShoppingcartPage implements OnInit {
 
   
   async ionViewDidEnter() {
+    await this.loadingservice.presentLoading();
     this.client = await this.storage.get("client");
     await this.getLastShoppingCartIdNotPayedByClientId(this.client.id);
     await this.getOrderByShoppingCartId(this.shoppingcartid);
     await this.getImgByProductId();
     await this.getTotalPrice();
+    console.log(this.orderlist);
+    await this.loadingservice.dismissing();
+    
   }
 
- /* async getShoppingcartProductsByClientId(client_id:Number){
+ /* async getShoppingcartProductsByClientId(client_id:number){
     this.productlist = await this.productservice.getShoppingcartProductsByClientId(client_id);
     
   }*/
@@ -74,17 +79,17 @@ export class ShoppingcartPage implements OnInit {
     
   }
 
-  async getOrderByShoppingCartId(shoppingcart_id:Number){
+  async getOrderByShoppingCartId(shoppingcart_id:number){
     this.orderlist = await this.orderservice.getOrderByShoppingCartId(shoppingcart_id);
    console.log(this.orderlist)
   }
 
-  async getLastShoppingCartIdNotPayedByClientId(client_id:Number){
+  async getLastShoppingCartIdNotPayedByClientId(client_id:number){
     this.shoppingcartid = await this.shoppingcartservice.getLastShoppingCartIdNotPayedByClientId(client_id);
     console.log(this.shoppingcartid);
   }
 
- async deleteOrder(order_id:Number){
+ async deleteOrder(order_id:number){
    this.orderservice.deleteOrder(order_id);
    this.reloadPage();
  }
@@ -99,8 +104,24 @@ export class ShoppingcartPage implements OnInit {
  }
 
 
- async buyProducts(){
-   
+ async payShoppingCart(){
+   let confirmed = await this.alertservice.confirmAlert("Pago de la compra","¿Seguro que quieres realizar la compra con un precio final de: " + await this.getTotalPrice(),"Cancelar","Aceptar") ;
+   console.log(confirmed);
+   if(confirmed){
+    let result = await this.shoppingcartservice.payShoppingCart(this.client.id, this.shoppingcartid);
+    if(result){
+     this.alertservice.presentAlert("Tu pedido se ha realizado con exito, gracias por comprar!", "Compra realizada");
+     await this.reloadPage();
+    }else{
+     this.alertservice.presentAlert("No tienes saldo suficiente para comprar los productos", "No se ha realizado la compra");
+    }
+   }
+
+  
+ }
+
+ async goToProducts(){
+   this.router.navigate(['products'])
  }
 
 

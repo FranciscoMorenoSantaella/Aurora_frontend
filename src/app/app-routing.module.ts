@@ -30,6 +30,10 @@ const routes: Routes = [
     path: 'product',
     loadChildren: () => import('./pages/product/product.module').then( m => m.ProductPageModule)
   },
+  {
+    path: 'recoverpassword',
+    loadChildren: () => import('./pages/recoverpassword/recoverpassword.module').then( m => m.RecoverpasswordPageModule)
+  },
 
 ];
 

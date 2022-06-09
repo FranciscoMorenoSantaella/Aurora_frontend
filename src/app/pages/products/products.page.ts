@@ -1,12 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { IonContent, IonSegment } from '@ionic/angular';
+import { Client } from 'src/app/model/Client';
 import { Image } from 'src/app/model/Image';
 import { Product } from 'src/app/model/Product';
 import { ImageService } from 'src/app/services/image.service';
 import { LoadingService } from 'src/app/services/loading.service';
+import { OrderService } from 'src/app/services/order.service';
 import { ProductService } from 'src/app/services/product.service';
+import { ShoppingcartService } from 'src/app/services/shoppingcart.service';
 import { StorageService } from 'src/app/services/storage.service';
+import { Shoppingcart } from 'src/app/model/ShoppingCart';
 
 @Component({
   selector: 'app-products',
@@ -23,7 +27,9 @@ export class ProductsPage implements OnInit {
   image: Image;
   url = 'localhost:8080/image/files/1f6f8a27-54dc-436c-aff0-4db4735f84ed.png';
   segmentaux: String;
-
+  client:Client;
+  a:ShoppingcartService;
+  badge:any;
   formatter = new Intl.NumberFormat('es-ES', {
     style: 'currency',
     currency: 'EUR',
@@ -40,7 +46,9 @@ export class ProductsPage implements OnInit {
     private router: Router,
     private storage: StorageService,
     private imageservice: ImageService,
-    private loadingservice:LoadingService
+    private loadingservice:LoadingService,
+    private orderservice:OrderService,
+    private shoppingcartservice:ShoppingcartService
   ) {}
 
   async ngOnInit() {
@@ -50,7 +58,13 @@ export class ProductsPage implements OnInit {
     await this.getImgByProductId();
     await this.loadingservice.dismissing();
     console.log(this.productlist);
+  
    
+  }
+
+  async ionViewDidEnter() {
+    this.client = await this.storage.get('client');
+    await this.calculateBadge();
   }
 
   async getProducts() {
@@ -114,7 +128,14 @@ export class ProductsPage implements OnInit {
     goToShoppingCart(){
       this.router.navigate(['shoppingcart']);
     }
-  
+
+
+    async calculateBadge(){
+     let shoopingcartid:number = await this.shoppingcartservice.getLastShoppingCartIdNotPayedByClientId(this.client.id);
+    
+     this.badge =  (await this.orderservice.getOrderByShoppingCartId(shoopingcartid)).length;
+     console.log(this.badge);
+    }
 
   }
 

@@ -81,10 +81,10 @@ export class AuthService {
       .then(data => {
         console.log(data);
         this.alertservice.presentToast("Se ha enviado el codigo de recuperación de contraseña","primary"); // this is toastController
-        this.router.navigateByUrl('home');
+        this.router.navigateByUrl('/home');
       })
       .catch(err => {
-
+      
       });
   }
 

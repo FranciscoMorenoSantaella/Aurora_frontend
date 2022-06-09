@@ -5,6 +5,7 @@
       <ion-back-button defaultHref="products"></ion-back-button>
     </ion-buttons>
     <ion-icon (click)="goToShoppingCart()" class="cart" slot="end" name="cart-outline"></ion-icon>
+    <ion-badge class="badge-color">{{this?.badge}}</ion-badge>
   </ion-toolbar>
 </ion-header>
 <app-swiperc></app-swiperc>
