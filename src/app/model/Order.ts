@@ -6,5 +6,5 @@ export interface Order {
   id?:Number
   shoppingcart:Shoppingcart,
   product:Product,
-  amount?:Number
+  amount?:number
 }

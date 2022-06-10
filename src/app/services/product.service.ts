@@ -27,6 +27,22 @@ export class ProductService {
     });
   }
 
+  public async getProductById(
+    product_id: number
+  ): Promise<Product> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = (await this.http
+          .get(
+            this.endpoint + product_id
+          )
+          .toPromise()) as Product;
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
   public getnecklaceProductsByPage(page: Number, limit: Number): Promise<Product[]> {
     return new Promise(async (resolve, reject) => {
       try {
@@ -66,7 +82,23 @@ export class ProductService {
     });
   }
 
- 
+  public async subtractStock(
+    product_id:number, amount:number
+  ): Promise<Boolean> {
+    return new Promise(async (resolve, reject) => {
+      try {
+        let result: any = (await this.http
+          .get(
+            this.endpoint + 'subtractStock/' + amount + '/' + product_id
+          )
+          .toPromise()) as Boolean;
+        resolve(result);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
 
 
 }

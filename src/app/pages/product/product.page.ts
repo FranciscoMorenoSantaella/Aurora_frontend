@@ -36,11 +36,13 @@ export class ProductPage  {
     this.client = await this.storage.get('client');
     await this.loadingservice.presentLoading();
     
-    this.product = await this.storage.get('product');
+    let product = await this.storage.get('product');
+    this.product = await this.productservice.getProductById(product.id);
+    this.product.url = product.url;
     await this.loadingservice.dismissing();
     await this.getLastShoppingCartIdNotPayedByClientId(this.client.id);
  
-    console.log(this.shoppingcartid);
+   
     this.calculateBadge();
   }
 
@@ -55,10 +57,16 @@ export class ProductPage  {
       product:this.product,
       amount:this.amount
     }
-    if(this.amount<=this.product.stock){
-      await this.orderservice.postOrder(order);
+    let product = await this.productservice.getProductById(this.product.id);
+    console.log(product?.stock);
+    if(this.amount <= product?.stock){
+      if(this.product?.stock == 0){
+        this.limitAmountAlert('Querias añadir al carro la cantidad de ' + this.amount  + ' y solo hay disponibles ' + product?.stock +  ' ' +  this.product.name, 'Cantidad superada');
+      }else{
+        await this.orderservice.postOrder(order);
+      }
     }else{
-      this.limitAmountAlert('Querias añadir al carro la cantidad de ' + this.amount  + ' y solo hay disponibles ' + this.product.stock +  ' ' +  this.product.name, 'Cantidad superada');
+      this.limitAmountAlert('Querias añadir al carro la cantidad de ' + this.amount  + ' y solo hay disponibles ' + product?.stock +  ' ' +  this.product.name, 'Cantidad superada');
     }
   }
 
