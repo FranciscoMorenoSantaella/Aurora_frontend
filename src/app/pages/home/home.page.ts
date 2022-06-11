@@ -8,13 +8,14 @@ import {
 import { Router } from '@angular/router';
 import { Capacitor } from '@capacitor/core';
 import { IonSegment } from '@ionic/angular';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ClientService } from 'src/app/services/client.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Client } from 'src/app/model/Client';
 import { AlertserviceService } from 'src/app/services/alertservice.service';
 import { Storage } from '@ionic/storage';
 import { StorageService } from 'src/app/services/storage.service';
+import { LoadingService } from 'src/app/services/loading.service';
 
 
 
@@ -25,7 +26,8 @@ import { StorageService } from 'src/app/services/storage.service';
   encapsulation: ViewEncapsulation.None,
 })
 export class HomePage implements AfterContentChecked {
-
+  @ViewChild('formLogin', {static:false}) formlogin: NgForm;
+  @ViewChild('formSignUp', {static:false}) formsignup: NgForm;
   @ViewChild('segment') segment: IonSegment;
   segmentaux: Boolean = true;
   formLogin: FormGroup;
@@ -35,7 +37,7 @@ export class HomePage implements AfterContentChecked {
 
 
   constructor(private router: Router, private fb: FormBuilder, private clientservice:ClientService,private authservice:AuthService,private storage:StorageService,
-    private alertservice:AlertserviceService
+    private alertservice:AlertserviceService, private loadingservice:LoadingService
     ) {}
 
   async ngOnInit() {
@@ -72,8 +74,15 @@ export class HomePage implements AfterContentChecked {
     
   }
 
+  /**
+   * Metodo que al entrar a la vista ve si tenemos ya iniciado sesion y nos lleva a welcome si ya la tenemos iniciada de otra ocasion
+   */
   async ionViewDidEnter() {
-    this.client = await this.storage.get('client');
+    await this.loadingservice.presentLoading();
+    await this.formSignUp?.reset();
+    await this.formLogin?.reset();
+    this.client = await this.storage.get('client'); 
+    await this.loadingservice.dismissing();
     if (this.client) {
       this.router.navigate(['/welcome']);
     }
@@ -83,6 +92,10 @@ export class HomePage implements AfterContentChecked {
     
   }
 
+  /**
+   * Metodo que detecta cuando cambia el ion-segment para mostrar el formulario de inicio de sesión o de registrarse segun el booleano auxiliar
+   * @param $event este evento se hace cuando detecta un cambio en el ion-segment
+   */
   segmentChanged($event) {
     if (this.segment.value == 'login') {
       this.segmentaux = true;
@@ -91,6 +104,10 @@ export class HomePage implements AfterContentChecked {
     }
   }
 
+  /**
+   * Metodo para iniciar sesión comparando el uid al haber iniciado sesión en firebase junto a nuestro uid guardado en la base de datos
+   * si iniciamos sesion correctamente este metodo nos lleva a la pagina de bienvenida
+   */
   async signIn(){
     if(this.formLogin.valid){
       try {
@@ -114,6 +131,10 @@ export class HomePage implements AfterContentChecked {
   }
 
 
+  /**
+   * Metodo que registra a un usuario con email y contraseña en firebase segun los datos de nuestro formulario y a su vez crea el usuario en nuestra base de datos
+   * con todos los campos que no se guardan en firebase como por ejemplo numero de telefono, saldo...
+   */
   async signUp(){
     if(this.formSignUp.valid){
         let result = await this.authservice.signUp(this.formSignUp.get('email').value,
@@ -139,10 +160,16 @@ export class HomePage implements AfterContentChecked {
     }
   }
 
+  /**
+   * Metodo que nos lleva a la pagina de recuperar contraseña
+   */
   goToRecoverPassword(){
     this.router.navigate(['recoverpassword']);
   }
 
+  /**
+   * Metodo que nos lleva a la pagina de productos
+   */
   goToProducts(){
     this.router.navigate(['products']);
   }

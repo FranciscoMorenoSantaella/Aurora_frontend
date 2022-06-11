@@ -19,7 +19,7 @@
   <app-swiperc></app-swiperc>
   <h1>Mi cuenta</h1>
 
-  <ion-segment (ionChange)="segmentChanged($event)" #segment color="dark">
+  <ion-segment value="login" (ionChange)="segmentChanged($event)" #segment color="dark">
     <ion-segment-button value="login">
       <ion-label>Iniciar sesión</ion-label>
     </ion-segment-button>
@@ -43,6 +43,7 @@
     <ion-button class="black" expand="block" (click)="signIn()"
       >Continuar</ion-button
     >
+  
   </div>
 
   
@@ -63,7 +64,7 @@
       <ion-item>
         <ion-label color="dark" position="floating">Numero de telefono</ion-label>
 
-        <ion-input formControlName="phonenumber"></ion-input>
+        <ion-input formControlName="phonenumber">{{this.client?.phonenumber}}</ion-input>
       </ion-item>
       
       <ion-item>
@@ -83,6 +84,7 @@
     >
   </div>
   <div *ngIf="!this.segmentaux" class="container"></div>
+  <a (click)="goToRecoverPassword()">Recuperar contraseña</a>
 </ion-content>
 
 <ion-menu side="start" contentId="menuContent">
@@ -95,6 +97,7 @@
    <ion-item>
      <ion-button expand="full" color="dark">Ver productos</ion-button>
     </ion-item>
+    
   </ion-content>
 </ion-menu>
 <div id="menuContent"></div>

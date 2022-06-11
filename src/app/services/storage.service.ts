@@ -45,6 +45,11 @@ export class StorageService {
     this._storage?.remove(key);
   }
 
+  /**
+   * Metodo que devuelve el cliente actual (creo que no lo uso)
+   * @param text 
+   * @returns 
+   */
   getCurrent(text:string):Promise<Client>{
     if(this.storage.get(text)){
       return this.data = this.storage.get(text);

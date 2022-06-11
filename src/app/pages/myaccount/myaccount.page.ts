@@ -28,6 +28,9 @@ export class MyaccountPage {
 
   constructor(private router:Router, private modalcontroller:ModalController, private clientservice:ClientService, private storage:StorageService,private loadingservice:LoadingService) { }
 
+  /**
+   * Metodo que al cargar la vista carga al cliente y le da formato a la cantidad de saldo
+   */
   async ionViewDidEnter() {
     await this.loadingservice.presentLoading();
     this.client = await this.storage.get('client');
@@ -39,16 +42,22 @@ export class MyaccountPage {
   
   }
 
-  async openModal(){
-    const modal = await this.modalcontroller.create({
-      component:EditmyaccountmodalComponent
-    });
-    modal.present();
-  }
-
+  /**
+   * Metodo que carga al cliente desde la base de datos 
+   * @param client_id 
+   */
   async getClientById(client_id:number){
     this.client = await this.clientservice.getClientById(client_id)
   }
 
+  /**
+   * Metodo que nos lleva a la pagina de editar cliente
+   */
+  goToEditAccount(){
+    this.router.navigate(['editmyaccount']);
+  }
 
+  goToProducts(){
+    this.router.navigate(['products'])
+  }
 }

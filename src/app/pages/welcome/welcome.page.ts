@@ -20,34 +20,37 @@ export class WelcomePage  {
   
   }
 
+  /**
+   * Metodo para ir a detalles de la cuenta
+   */
   goToMyAccount(){
     this.router.navigate(['myaccount']);
   }
 
+  /**
+   * Metodo para ir al carro de la compra
+   */
   goToShoppingCart(){
     this.router.navigate(['shoppingcart']);
   }
+ 
 
+  /**
+   * Metodo para cerrar sesion
+   */
   logout(){
     this.alertservice.presentToast('Se ha cerrado sesión correctamente', 'success');
     this.authservice.logout();
   }
 
+
+  /**
+   * Metodo para ir a productos
+   */
   goToProducts(){
     this.router.navigate(['products']);
   }
 
-  async a(){
-    await this.alertservice.presentToast("Nota agrageda Correctamente", "success");
-  }
 
-  async presentToast(msg:string,cl:string) {
-    let toast = await this.toast.create({
-      message: 'Toast Message',
-      duration: 3000
-    });
-    return await toast.present();
-
-  }
   
 }

@@ -4,10 +4,11 @@
 
 export const environment = {
   production: false,
-  endpoint:'http://localhost:8080/',
+  endpoint:'https://aurora-heroka.herokuapp.com/',
   apiClient:'client/',
   apiProduct:'product/',
   apiShoppingCart:'shoppingcart/',
+  apiImage:'image/',
   apiOrder:'order/',
   firebaseConfig:{
     apiKey: "AIzaSyAAe7YGAR4Nsitwrx8SCiNvrFTVdV73qKU",

@@ -32,6 +32,11 @@ export class AlertserviceService {
     toast.present();
   }
 
+  /**
+   * Metodo que muestra una alerta
+   * @param msg el mensaje que se muestra en la alerta
+   * @param title el titulo que se muestra en la alerta
+   */
   async presentAlert(msg: string, title: string) {
     const alert = await this.alertcontroller.create({
       cssClass: 'my-custom-class',
@@ -46,6 +51,14 @@ export class AlertserviceService {
     console.log('onDidDismiss resolved with role', role);
   }
 
+  /**
+   * Metodo que muestra una alerta de confirmacion
+   * @param header es la cabecera que se muestra en nuestra alerta
+   * @param message es el mensaje que se muestra en la alerta
+   * @param cancelText es el texto que se muestra en el boton de cancelar
+   * @param okText es el texto que se muestra en el boton de confirmar
+   * @returns 
+   */
   async confirmAlert(header: any,message: any,cancelText: any,okText: any): Promise<Boolean> {
     return new Promise(async (resolve) => {
       const alert = await this.alertcontroller.create({

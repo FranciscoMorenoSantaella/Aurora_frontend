@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AlertserviceService } from 'src/app/services/alertservice.service';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -9,8 +10,11 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class RecoverpasswordPage implements OnInit {
   formRecover:FormGroup;
-  constructor(private authservice:AuthService, private fb:FormBuilder) { }
+  constructor(private authservice:AuthService, private fb:FormBuilder, private alertservice:AlertserviceService) { }
 
+  /**
+   * Metodo que al iniciar la pagina crea la validacion del formulario
+   */
   ngOnInit() {
     this.formRecover = this.fb.group({
       email: [
@@ -26,7 +30,16 @@ export class RecoverpasswordPage implements OnInit {
     });
 }
 
+/**
+ * Metodo que sirve para que te llegue un email para recuperar contraseña al correo introducido en el formulario
+ */
   recoverPassword(){
+    if(this.formRecover.get('email').valid){
+    
+    
     this.authservice.recover(this.formRecover.get('email').value);
+    }else{
+      this.alertservice.presentToast("El correo no es valido","danger")
+    }
   }
 }

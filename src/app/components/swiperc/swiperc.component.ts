@@ -3,8 +3,9 @@ import SwiperCore, { Pagination, Autoplay, SwiperOptions } from 'swiper';
 import { SwiperComponent } from 'swiper/angular';
 
 
-
+//Para que el swiper tenga paginacion
 SwiperCore.use([Pagination]);
+//Para que se mueva solo
 SwiperCore.use([Autoplay]);
 
 @Component({

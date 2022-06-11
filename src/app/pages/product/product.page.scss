@@ -22,10 +22,13 @@ ion-title {
 }
 
 .product-img{
+  height: 300px;
+  width: 100%;
+  transform: scale(2);
+  margin-top: 10px;
 }
 
 ion-grid{
-  border-top: 1px solid black;
   margin-top: -5%;
 }
 
@@ -49,4 +52,12 @@ ion-chip{
   top: 7px;
   right: 8px;
   border-radius: 100%;
+}
+
+.row1{
+  margin-top: 5%;
+}
+
+.p-left{
+  margin-left: 1px;
 }

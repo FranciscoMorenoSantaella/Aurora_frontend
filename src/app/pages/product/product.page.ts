@@ -32,9 +32,14 @@ export class ProductPage  {
     ) { }
 
 
-  async ionViewWillEnter() {
-    this.client = await this.storage.get('client');
+
+    /**
+     * Metodo que se ejecuta al entrar a la vista, carga al cliente y carga al producto con su imagen y carga el carrito de la compra que tenemos disponible por si deseamos añadir
+     * el producto al carro de la compra y calculamos el numero para mostrar en el ion-badge
+     */
+    async ionViewWillEnter() {
     await this.loadingservice.presentLoading();
+    this.client = await this.storage.get('client');
     
     let product = await this.storage.get('product');
     this.product = await this.productservice.getProductById(product.id);
@@ -48,7 +53,10 @@ export class ProductPage  {
 
  
 
-
+  /**
+   * Metodo en el que creamos una nueva orden con el id del ultimo carro no pagado del cliente en esta orden se tendra el carro del cliente al que va 
+   * a ser añadido el producto
+   */
   async addProductToOrder(){
  
     let order:Order = {
@@ -63,18 +71,31 @@ export class ProductPage  {
       if(this.product?.stock == 0){
         this.limitAmountAlert('Querias añadir al carro la cantidad de ' + this.amount  + ' y solo hay disponibles ' + product?.stock +  ' ' +  this.product.name, 'Cantidad superada');
       }else{
-        await this.orderservice.postOrder(order);
+        let product = await this.orderservice.postOrder(order);
+        if(product != null){
+          await this.calculateBadge();
+          this.alertservice.presentToast("El producto se ha añadido correctamente","success");
+        }else{
+          this.alertservice.presentToast("El producto no se ha podido añadir","danger");
+        }
       }
     }else{
       this.limitAmountAlert('Querias añadir al carro la cantidad de ' + this.amount  + ' y solo hay disponibles ' + product?.stock +  ' ' +  this.product.name, 'Cantidad superada');
     }
   }
 
+  /**
+   * Metodo que trae el ultimo carro de la compra no pagado del usuario para luego añadir el producto
+   * @param client_id es el id del cliente del que queremos traer el ultimo carro de la compra
+   */
   public async getLastShoppingCartIdNotPayedByClientId(client_id:number){
     this.shoppingcartid = await this.shoppingcartservice.getLastShoppingCartIdNotPayedByClientId(client_id);
     console.log(this.shoppingcartid);
   }
 
+  /**
+   * Metodo que suma el numero de la cantidad de producto que vamos a querer comprar de dicho producto
+   */
   async sum(){
     this.amount++;
   }
@@ -87,10 +108,18 @@ export class ProductPage  {
     }
   }
 
+  /**
+   * Alerta que presentamos cuando sobrepasamos el numero de la cantidad disponible del producto
+   * @param msg es el mensaje que se mostrara
+   * @param title es el titulo del mensaje que se mostrara
+   */
   limitAmountAlert(msg:string,title:string){
       this.alertservice.presentAlert(msg,title);
   }
 
+  /**
+   * Metodo que nos lleva al carro de la compra
+   */
   goToShoppingCart(){
     this.router.navigate(['shoppingcart']);
   }
@@ -102,6 +131,13 @@ export class ProductPage  {
     console.log(this.badge);
    }
 
+
+   /**
+    * Metodo que nos lleva a home
+    */
+   goToLogin(){
+    this.router.navigate(['home'])
+   }
 
 
 }

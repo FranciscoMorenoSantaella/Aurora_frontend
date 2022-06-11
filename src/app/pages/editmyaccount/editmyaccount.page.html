@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar class="background-color">
+    <ion-title>Aurora</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="myaccount"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <form [formGroup]="formUpdateClient">
+      <ion-item>
+        <ion-label color="dark" position="stacked">Nombre</ion-label>
+
+        <ion-input formControlName="name" value="{{client?.name}}"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="dark" position="stacked">Apellidos</ion-label>
+
+        <ion-input formControlName="surname" value="{{client?.surname}}"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label color="dark" position="stacked">Numero de telefono</ion-label>
+
+        <ion-input formControlName="phonenumber" value="{{client?.phonenumber}}"></ion-input>
+      </ion-item>
+      
+      </form>
+    </div>
+    <ion-button expand="full" color="dark" (click)="updateClient()">Editar</ion-button>
+</ion-content>

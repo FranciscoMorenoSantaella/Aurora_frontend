@@ -34,6 +34,10 @@ const routes: Routes = [
     path: 'recoverpassword',
     loadChildren: () => import('./pages/recoverpassword/recoverpassword.module').then( m => m.RecoverpasswordPageModule)
   },
+  {
+    path: 'editmyaccount',
+    loadChildren: () => import('./pages/editmyaccount/editmyaccount.module').then( m => m.EditmyaccountPageModule)
+  },
 
 ];
 

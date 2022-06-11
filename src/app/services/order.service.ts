@@ -10,27 +10,42 @@ export class OrderService {
   endpoint: any = environment.endpoint + environment.apiOrder;
   constructor(private http: HttpClient) {}
 
-  public async postOrder(order: Order) {
-    console.log(order);
-    await this.http.post(this.endpoint, order).toPromise();
-  }
-
-  public async deleteOrder(order_id: Number) {
-    console.log(order_id);
-    await this.http.delete(this.endpoint + order_id).toPromise();
-  }
-
-  /*public async getShoppingcartOrderByClientId(client_id:Number):Promise<Order[]>{
+  /**
+   * Metodo para crear una nueva orden (en la base de datos)
+   * @param order es la orden que vamos a crear
+   */
+  public async postOrder(order: Order):Promise<Order> {
     return new Promise(async (resolve, reject) => {
       try {
-        let result: any = await this.http.get(this.endpoint+ "getshoppingcartordersbyclientid" + "/" + client_id).toPromise() as Order[];
+        let result: any = (await this.http
+          .post(
+            this.endpoint,order
+
+          )
+          .toPromise()) as Order[];
         resolve(result);
       } catch (error) {
         reject(error);
       }
     });
-  }*/
+  }
 
+  /**
+   * Metodo para borra una orden
+   * @param order_id es el id de la orden que vamos a borrar
+   */
+  public async deleteOrder(order_id: Number) {
+    console.log(order_id);
+    await this.http.delete(this.endpoint + order_id).toPromise();
+  }
+
+
+
+  /**
+   * Metodo que trae las ordenes de un carro de la compra
+   * @param shoppingcart_id 
+   * @returns 
+   */
   public async getOrderByShoppingCartId(
     shoppingcart_id: Number
   ): Promise<Order[]> {

@@ -52,6 +52,12 @@ export class AuthService {
   }
 
 
+  /**
+   * Metodo que crea un nuevo cliente en firebase
+   * @param email es el email del cliente que queremos crear
+   * @param password es la contraseña del cliente que queremos crear
+   * @returns devuelve el uid
+   */
   async signUp(email:string, password:string):Promise<String>{
     if(email !=null && password !=null){
       try {
@@ -63,6 +69,12 @@ export class AuthService {
     }
   }
 
+  /**
+   * Metodo de inicio de sesion en firebase
+   * @param email es el email del cliente con el que queremos inciar sesion
+   * @param password es la contraseña del cliente con la que queremos iniciar sesion
+   * @returns devuelve firebase.auth.credential
+   */
   async signIn(email:string, password:string){
     if(email != null && password != null){
       try{
@@ -76,6 +88,10 @@ export class AuthService {
 
 
 
+  /**
+   * Metodo para recuperar contraseña (cambiarla) de un correo
+   * @param email es el correo del que queremos cambiar la contraseña
+   */
   recover(email:string) {
     this.auth.sendPasswordResetEmail(email)
       .then(data => {
@@ -84,10 +100,14 @@ export class AuthService {
         this.router.navigateByUrl('/home');
       })
       .catch(err => {
-      
+        this.alertservice.presentToast("El correo no se encuentra en firebase","danger");
       });
   }
 
+  /**
+   * Metodo para traer a un cliente (no usado)
+   * @returns un cliente
+   */
   getCurrentClient():Promise<Client>{
     if(this.storage.get('client')){
       return this.client = this.storage.get('client');

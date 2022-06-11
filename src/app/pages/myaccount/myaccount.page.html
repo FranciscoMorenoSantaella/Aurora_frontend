@@ -5,10 +5,12 @@
       <ion-back-button defaultHref="welcome"></ion-back-button>
       
     </ion-buttons>
+    <ion-buttons slot="end" (click)="goToProducts()">
     <img
       class="header-icon right"
       src="../../../assets/icon/shopping-bag.png"
     />
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -77,6 +79,6 @@
       
       </ion-row>
       </ion-grid>
-    <ion-button color="light" expand="full" (click)="openModal()">Editar datos</ion-button>
+    <ion-button color="light" expand="full" (click)="goToEditAccount()">Editar datos</ion-button>
   </div>
 </ion-content>

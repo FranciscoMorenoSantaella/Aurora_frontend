@@ -10,22 +10,22 @@
 </ion-header>
 <ion-content>
   <diV class="container">
-  <form>
+  <form [formGroup]="formUpdateClient" >
     <ion-item>
         <ion-label color="dark" position="floating">Nombre</ion-label>
-        <ion-input value="{{this.client?.name}}"></ion-input>
+        <ion-input value="{{this.client?.name}}" formControlName="name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="dark" position="floating">Apellidos</ion-label>
-        <ion-input value="{{this.client?.apellidos}}"></ion-input>
+        <ion-input value="{{this.client?.surname}}" formControlName="surname"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="dark" position="floating">Email</ion-label>
-        <ion-input value="{{this.client?.email}}"></ion-input>
+        <ion-input value="{{this.client?.email}}" formControlName="email"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="dark" position="floating">Telefono</ion-label>
-        <ion-input value="{{this.client?.telefono}}"></ion-input>
+        <ion-input value="{{this.client?.phonenumber}}" formControlName="phonenumber"></ion-input>
       </ion-item>
 
     </form>

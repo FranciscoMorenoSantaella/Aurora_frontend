@@ -6,19 +6,21 @@
     </ion-buttons>
     <ion-icon (click)="goToShoppingCart()" class="cart" slot="end" name="cart-outline"></ion-icon>
     <ion-badge class="badge-color">{{this?.badge}}</ion-badge>
+
   </ion-toolbar>
+ 
 </ion-header>
 <app-swiperc></app-swiperc>
 <ion-content>
 <div>
-  <ion-img [src]="this.product?.url"></ion-img>
+  <ion-img class="product-img" [src]="this.product?.url"></ion-img>
 <ion-grid>
-  <ion-row>
+  <ion-row class="row1">
 <ion-col  size = "9">
-  <p>{{this.product?.name}}</p>
+  <p class="p-left">{{this.product?.name}}</p>
 </ion-col>
 <ion-col  size="2.3">
-  <p >{{this.product?.price}} €</p>
+  <p class="p-left">{{this.product?.price}} €</p>
 </ion-col>
   </ion-row>
   <ion-row>
@@ -38,5 +40,5 @@
 </div>
 <ion-button *ngIf="this.product?.stock >0 && this.client" expand="full" color="dark" (click)="addProductToOrder()">Añadir</ion-button>
 <ion-button disabled *ngIf="this.product?.stock <=0 && this.client" expand="full" color="dark">Añadir</ion-button>
-<ion-button *ngIf="!this.client">Inicia sesion crack</ion-button>
+<ion-button expand="full" color="dark" (click)="goToLogin()" *ngIf="!this.client">Inicia sesión para comprar</ion-button>
 </ion-content>
