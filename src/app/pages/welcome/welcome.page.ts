@@ -17,6 +17,7 @@ export class WelcomePage  {
 
   async ionViewDidEnter() {
     this.client = await this.storage.get('client');
+    
   
   }
 

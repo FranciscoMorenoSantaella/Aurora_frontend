@@ -98,6 +98,7 @@ export class ProductsPage implements OnInit {
    * Metodo que carga las imagenes de la lista de productos pasandole la id de cada producto
    */
   async getImgByProductId() {
+    
     for (let i: number = 0; this.productlist.length > i; i++) {
       this.image = await this.imageservice.getImgByProductId(
         this.productlist[i].id
@@ -253,6 +254,16 @@ export class ProductsPage implements OnInit {
 
     }
     
+    /**
+     * Recarga la pagina
+     * @param event detecta cuando se hace la accion de recarga la pagina
+     */
+    async doRefresh(event) {
+      await this.loadingservice.presentLoading();
+      this.ionViewDidEnter();
+      await this.loadingservice.dismissing();
+      event.target.complete();
+    }
     
   }
 
